@@ -41,68 +41,63 @@ The program has 3 main API endpoints:
 <br /> 
 - the microservice will be requesting users to enter a name, email, and phone number, which be written into users2.json
 - This will handle the first endpoint, POST /clients
+- when the microservice reads user input, it will process the input and add everything to users2.json
 ```ruby
-//name: createClient
-//desc: receive data on clients to store in .json
-void createClient(const string& name, const string& eMail, const string& phoneNum) {
-  json clientInfo;
-  clientInfo["name"] = name;
-  clientInfo["email"] = eMail;
-  clientInfo["phoneNum"] = phoneNum;
+def tAddClient(success=True):
+    clientData = {
+        "name": "Kaye Dela Chica" if success else "CANCEL",
+        "email": "delachic@oregonstate.edu",
+        "phone": "123-456-7890"
+    }
 
-  ofstream file("fileNameHere.json);
-  file.close();
-  cout << "Client added";
-}
+    response = requests.post(f"{listenHere}/clients", json=clientData)
+    print(f"\nTesting Add Client ({'Success' if success else 'Cancel'}):", response.json())
+    print(f"Status Code: {response.status_code}, Response: {response.json()}")
 ```
-- when the microservice reads user input, it will process the input and add everything to fileNameHere.json
-- As a programmer, you will edit the code to allow users to manually input it themselves
-- if it was successfully made, then the program will display
-```
-int main() {
-  createClient("Kaye DelaChica," "delachic@osu.edu", "503-111-1111");
-  return 0;
-}
-```
+- As a programmer, you will edit the code to allow users to manually test it themselves
+- If the entry is successful, the status code will respond with a 201 code, whereas an unsuccessful entry (or cancel) will output a 400 status code. 
+![Image](https://github.com/user-attachments/assets/c5e85da2-0153-44ef-b919-ff80009d4b5b)
 
 <br />**REQUEST new Photoshoot**
 <br /> 
-- This works similar to createClient. the microservice will be requesting users to enter a name, email, and phone number, which be written into fileNameHere.json.
-- this will return a confirmation.
-- Create a function prorotype to create a new client
-- the function should create a .json request file
-```
-//name: createPS
-//desc: creates photo shoot by collecting information
-void createClient(const string& clientName, const string& date, const string& time, const string& locatatoin) {
-  json psInfo;
-  psInfo["clientName"] = clientName;
-  psInfo["date"] = date;
-  psInfo["time"] = time;
-  psInfo["location"] = location;
+- This works similar to clients. the microservice will be requesting users to enter a name, email, and phone number, which be written into users2.json. This will handle the second endpoint POST /photoshoots.
+- this will return a confirmation and cancelation message like /clients
+```ruby
+def tAddPS(success=True):
+    psData = {
+        "client": "Kaye Dela Chica" if success else "CANCEL",
+        "date": "2025-03-05",
+        "time": "12:00",
+        "location": "Portland"
+    }
 
-  ofstream file("fileNameHere.json);
-  file.close();
-  cout << "Photoshoot added.\n";
-}
+    response = requests.post(f"{listenHere}/photoshoots", json=psData)
+
+    print(f"\nTestinf Add Photoshoot ({'Success' if success else 'Cancel'}):", response.json())
+    print(f"Status Code: {response.status_code}, Response: {response.json()}")
 ```
-- when the microservice reads user input, it will process the input and add everything to fileNameHere.json
-- As a programmer, you will edit the code to allow users to manually input it themselves
-```
-int main() {
-  psInfo("Kaye DelaChica," "2025-02-23", "09:00", "Downtown Portland");
-  return 0;
-}
-```
+- similar to clients, test2.py's tAddPS sends data if true, assuming it was false, the data returns as canceled, outputting a 400 error code. 
+![Image](https://github.com/user-attachments/assets/66bc100f-c3a1-4d27-9f33-7dc0754af3e5)
+
 <br />**RETRIEVE appointments**
 <br />
-- the microservice will retrieve the data from users2.json, handling GET /appt end points.
-- we can use a CURL command
+- the microservice will retrieve the data from users2.json. tViewAppt() will send a GET request and will retrieve all the scheduled appts from users2.json.
+```ruby
+stormiServ.py
+@app.route("/appts", methods=["GET"])
+def viewAppt():
+    data = loadData()
+    numAppt = len(data["photoshoots"])
+    return jsonify({
+        "total appts": numAppt,
+        "appointments": data["photoshoots"]
+    })
+```
+We can use a CURL request to output to send a request to test. Successful, the code displays a 200 status code!  
 ```ruby
 curl.exe -X GET http://127.0.0.1:5000/appts
 ```
-to send a request to test. Successful, the code displays a 200 status code!  
-![Image](https://github.com/user-attachments/assets/fd5463ce-4f70-4ad4-987d-47b8c05f4447)
+![Image](https://github.com/user-attachments/assets/84768ec3-44f9-4c01-9beb-bdea52b1bd75)
 
 # UML
 ![Image](https://github.com/user-attachments/assets/c1f5bf72-ca80-4c24-bae8-117777c521c0)
