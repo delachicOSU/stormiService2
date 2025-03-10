@@ -27,15 +27,19 @@ def loadData():
         
     return {"clients": [], "photoshoots": []}
 ```
-The microservice will read and write info to users2.json and it will manage clients and photoshoots.
+The microservice will then write data back to the file and save for future use (saveInfo)
 
-The program will check if a the .json
+```ruby
+def saveInfo(data):
+    with open(dataBase, "w") as file:
+        json.dump(data, file, indent=4)
+```
 
 <br />**REQUEST to add a new client**
 <br /> 
 - the microservice will be requesting users to enter a name, email, and phone number, which be written into users2.json
 - This will handle the first endpoint, POST /clients
-```
+```ruby
 //name: createClient
 //desc: receive data on clients to store in .json
 void createClient(const string& name, const string& eMail, const string& phoneNum) {
