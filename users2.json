@@ -1,0 +1,17 @@
+{
+    "clients": [
+        {
+            "name": "Kaye Dela Chica",
+            "email": "delachic@oregonstate.edu",
+            "phone": "123-456-7890"
+        }
+    ],
+    "photoshoots": [
+        {
+            "client": "Kaye Dela Chica",
+            "date": "2025-03-05",
+            "time": "12:00",
+            "location": "Porland"
+        }
+    ]
+}
