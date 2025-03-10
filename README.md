@@ -100,4 +100,4 @@ curl.exe -X GET http://127.0.0.1:5000/appts
 ![Image](https://github.com/user-attachments/assets/84768ec3-44f9-4c01-9beb-bdea52b1bd75)
 
 # UML
-![Image](https://github.com/user-attachments/assets/c1f5bf72-ca80-4c24-bae8-117777c521c0)
+![Image](https://github.com/user-attachments/assets/8bbd16d7-9ab8-4b10-9baf-a7c7635fc1bb)
