@@ -35,6 +35,8 @@ def saveInfo(data):
         json.dump(data, file, indent=4)
 ```
 
+The program has 3 main API endpoints: 
+
 <br />**REQUEST to add a new client**
 <br /> 
 - the microservice will be requesting users to enter a name, email, and phone number, which be written into users2.json
@@ -94,51 +96,13 @@ int main() {
 ```
 <br />**RETRIEVE appointments**
 <br />
-- for this microservice, when the stored data will be coming from the .json file. In this case, we will be retrieving from fileNameHere.json
-- you can program the file and have i read/parse from the file to extract the files.
+- the microservice will retrieve the data from users2.json, handling GET /appt end points.
+- we can use a CURL command
+```ruby
+curl.exe -X GET http://127.0.0.1:5000/appts
 ```
-void viewAppt() {
-  ifstream file("fileNameHere.json")
-  json info;
+to send a request to test. Successful, the code displays a 200 status code!  
+![Image](https://github.com/user-attachments/assets/fd5463ce-4f70-4ad4-987d-47b8c05f4447)
 
-  if(!file.is_open()) {
-    cout << "Error opening .json";
-    return;
-  }
-  file >> data;
-  file.close();
-
-  //open file. If iti contains photoshoots, that means its not empty
-  if (data.contains("photoshoots") && !data[photoshoots"].empty()) {
-    cout << "Current appointments:\n";
-    for (const auto& appt : data["photoshoots"]) {
-      cout << "- " << appt["date"] << " at " << appt["time"] << " with " << appt["client"] << " at " << appt["location"] << endl;
-      }
-  } else {
-    cout << "No upcoming appointments found.\n";
-  }
-}
-```
-- The program will read the fileNameHere.json file and will collect the data.
-- this can be applied to clients as well.
-- In the .json file, it will store data accordingly (as seen from the raw data file from my code)
-```
-{
-    "clients": [
-        {
-            "email": "delachic@oregonstate.edu",
-            "name": "Kaye Delachica",
-            "phone": "503-999-9999"
-    ],
-    "photoshoots": [
-        {
-            "client": "Kaye Dela Chica",
-            "date": "2025-04-15",
-            "location": "Sunset Blvd",
-            "time": "09:00"
-        }
-    ]
-}
-```
 # UML
 ![Image](https://github.com/user-attachments/assets/c1f5bf72-ca80-4c24-bae8-117777c521c0)
